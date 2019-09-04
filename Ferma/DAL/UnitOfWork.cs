@@ -8,14 +8,14 @@ namespace DAL
 {
     public class UnitOfWork
     {
-        private FermaStorage _fermaStorage;
+        private FermaContext _fermaContext;
 
         private IFermaRepository _fermaRepository;
 
 
         public UnitOfWork()
         {
-            _fermaStorage = new FermaStorage();
+            _fermaContext = new FermaContext();
         }
 
 
@@ -25,11 +25,16 @@ namespace DAL
             {
                 if(_fermaRepository == null)
                 {
-                    _fermaRepository = new FermaRepository(_fermaStorage);
+                    _fermaRepository = new FermaRepository(_fermaContext);
                 }
 
                 return _fermaRepository;
             }
+        }
+
+        public void Save()
+        {
+            _fermaContext.SaveChanges();
         }
 
     }

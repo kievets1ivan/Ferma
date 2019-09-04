@@ -18,36 +18,35 @@ namespace DAL
     public class FermaRepository : IFermaRepository
     {
 
-        private FermaStorage _fermaStorage;
+        private FermaContext _db;
 
-        public FermaRepository(FermaStorage fermaStorage)
+        public FermaRepository(FermaContext context)
         {
-            _fermaStorage = fermaStorage;
+            _db = context;
         }
 
         public void Add(FermaEntity fermaEntity)
         {
 
-            _fermaStorage.AddFerma(fermaEntity);
+            _db.FermaEntities.Add(fermaEntity);
 
         }
 
 
         public void Delete(FermaEntity fermaEntity)
         {
-            _fermaStorage.DeleteFerma(fermaEntity.Id);
-
+            _db.FermaEntities.Remove(fermaEntity);
         }
 
 
         public FermaEntity GetById(int id)
         {
-            return _fermaStorage.GetFermaById(id);
+            return _db.FermaEntities.Find(id);
         }
 
         public IEnumerable<FermaEntity> GetAll()
         {
-            return _fermaStorage.GetAllFermas();
+            return _db.FermaEntities;
         }
 
 

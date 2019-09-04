@@ -14,22 +14,25 @@ namespace Ferma.Controllers
     {
 
         private IFermaRepository _fermaRepository;
+        private UnitOfWork _unitOfWork;
 
         public FermaController()
         {
-            var unitOfWork = new UnitOfWork();
+            _unitOfWork = new UnitOfWork();
 
-            _fermaRepository = unitOfWork.FermaRepository;
+            _fermaRepository = _unitOfWork.FermaRepository;
         }
 
         public IEnumerable<FermaEntity> Get()
         {
+            
             return _fermaRepository.GetAll();
         }
 
         public void Post([FromBody] FermaEntity fermaEntity)
         {
             _fermaRepository.Add(fermaEntity);
+            _unitOfWork.Save();
         }
 
     }

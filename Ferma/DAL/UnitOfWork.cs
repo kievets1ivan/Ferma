@@ -13,9 +13,9 @@ namespace DAL
         private IFermaRepository _fermaRepository;
 
 
-        public UnitOfWork()
+        public UnitOfWork(FermaContext fermaContext)
         {
-            _fermaContext = new FermaContext();
+            _fermaContext = fermaContext;
         }
 
 

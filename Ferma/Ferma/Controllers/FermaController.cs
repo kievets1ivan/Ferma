@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BuisnessLayer.Services;
+using DAL;
 using DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,27 +14,38 @@ namespace Ferma.Controllers
     public class FermaController : ApiController
     {
 
-        private IFermaRepository _fermaRepository;
-        private UnitOfWork _unitOfWork;
+        private FermaService _fermaService;
 
         public FermaController()
         {
-            _unitOfWork = new UnitOfWork();
-
-            _fermaRepository = _unitOfWork.FermaRepository;
+            // how to initialize controller(service)?
         }
+
 
         public IEnumerable<FermaEntity> Get()
         {
-            
-            return _fermaRepository.GetAll();
+
+            return _fermaService.GetAll();
         }
 
         public void Post([FromBody] FermaEntity fermaEntity)
         {
-            _fermaRepository.Add(fermaEntity);
-            _unitOfWork.Save();
+            _fermaService.AddFarm(fermaEntity);
         }
 
+        public void Delete([FromBody]FermaEntity fermaEntity)
+        {
+            _fermaService.DeleteFerma(fermaEntity);
+        }
+
+        public FermaEntity Get(int id)
+        {
+            return _fermaService.GetFermaById(id);
+        }
+
+        public void Put([FromBody]FermaEntity fermaEntity)
+        {
+            _fermaService.EditFerma(fermaEntity);
+        }
     }
 }

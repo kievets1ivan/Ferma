@@ -11,6 +11,7 @@ namespace DAL
     {
         void Add(FermaEntity fermaEntity);
         void Delete(FermaEntity fermaEntity);
+        void Update(FermaEntity fermaEntity);
         IEnumerable<FermaEntity> GetAll();
         FermaEntity GetById(int id);
     }
@@ -41,7 +42,7 @@ namespace DAL
 
         public FermaEntity GetById(int id)
         {
-            return _db.FermaEntities.Find(id);
+            return _db.FermaEntities.FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<FermaEntity> GetAll()
@@ -49,6 +50,10 @@ namespace DAL
             return _db.FermaEntities;
         }
 
+        public void Update(FermaEntity fermaEntity)
+        {
+            _db.FermaEntities.Attach(GetById(fermaEntity.Id));
+        }
 
     }
 }

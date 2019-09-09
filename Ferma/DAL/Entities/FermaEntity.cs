@@ -13,5 +13,6 @@ namespace DAL.Entities
         public string OwnerName { get; set; }
         public int AmountOfAnimals { get; set; }
         public bool IsDelete { get; set; }
+        public double Cost { get; set; }
     }
 }

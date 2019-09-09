@@ -18,7 +18,7 @@ namespace Ferma.Controllers
 
         public FermaController()
         {
-            // how to initialize controller(service)?
+            _fermaService = new FermaService(new UnitOfWork());
         }
 
 
